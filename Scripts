@@ -1,5 +1,6 @@
+###Conducting innitial fastqc on raw data
 On linux commandline i typed "fastqc ./fastq"
-Trimming of Data
+###Trimming of Data
 #!/bin/bash
 
 # Set the path to Trimmomatic
@@ -32,3 +33,36 @@ for fastq_pair in "$input_dir"/*_R1.fastq.gz; do
         "$reverse_output" "$output_dir/$base_name""_R2.unpaired.fastq.gz" \
         ILLUMINACLIP:"$adapter_file":2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 done
+
+
+###Running fastqc on trimmed data
+#!/bin/bash
+
+# Set the path to FastQC
+fastqc_path="/usr/bin/fastqc"
+
+# Set the directory containing the trimmed FASTQ files
+trimmed_dir="/home/mku/Data/Trimmomatic"
+
+# Set the output directory for FastQC results
+output_dir="/home/mku/Data/Fastqc/Trimmed data"
+
+
+####Doing MullticQC of trimmed data
+
+#!/bin/bash
+
+# Set the path to MultiQC
+multiqc_path="/usr/local/bin/multiqc"
+
+# Set the directory containing the trimmed FASTQ files
+trimmed_dir="/home/mku/Data/Trimmomatic"
+
+# Set the output directory for MultiQC report
+output_dir="/home/mku/Data/Multiqc"
+
+# Run MultiQC on the trimmed FASTQ files
+"$multiqc_path" "$trimmed_dir" -o "$output_dir"
+
+# Run FastQC on the trimmed FASTQ files
+"$fastqc_path" "$trimmed_dir"/*.fastq.gz -o "$output_dir"
