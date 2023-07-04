@@ -6,6 +6,9 @@ Raw whole exome data of patients is already available (both tumor and normal cel
 - Fastqc of raw WED and analysis of the reports
 - Trimming of data based on the report, using Trimmomatic
 - Conducting the second fastqc and generating a multiqc report
-- Alignment of trimmed data to whole human genome GRCh38.fna
+- Alignment of trimmed data to whole human genome GRCh38.fna using hisat2
+- Sorting of BAM files using Samtools
+- Doing variant calling using gatk tool
+  
 
 
